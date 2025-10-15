@@ -65,7 +65,7 @@ const signup = () => {
         })
         .then(() => {
             console.log("Đăng ký thành công");
-            window.location.replace = "./signin.html";
+            window.location.replace("./signin.html");
         })
         .catch(() => console.log("Thất bại!"));
 };
