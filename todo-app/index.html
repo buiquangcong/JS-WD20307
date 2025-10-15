@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todos App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .todo-item {
+      transition: all 0.3s ease;
+    }
+
+    .todo-item.completed {
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8 max-w-2xl">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <h1 class="text-4xl font-bold text-gray-800 mb-2">📝 Todos App</h1>
+      <p class="text-gray-600">Quản lý công việc của bạn một cách hiệu quả</p>
+    </div>
+
+    <!-- Add Todo Form -->
+    <div class="bg-white rounded-lg shadow-lg p-6 mb-6">
+      <form id="todoForm" class="flex gap-3">
+        <input type="text" id="todoInput" placeholder="Nhập công việc mới..."
+          class="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          required aria-label="Nhập công việc mới" />
+        <button type="submit"
+          class="px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-200 font-medium"
+          aria-label="Thêm công việc">
+          ➕ Thêm
+        </button>
+      </form>
+    </div>
+
+    <!-- Filter Buttons -->
+    <div class="flex justify-center gap-2 mb-6">
+      <button id="filterAll"
+        class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 filter-btn active">
+        Tất cả
+      </button>
+      <button id="filterActive"
+        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200 filter-btn">
+        Chưa hoàn thành
+      </button>
+      <button id="filterCompleted"
+        class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors duration-200 filter-btn">
+        Đã hoàn thành
+      </button>
+    </div>
+
+    <!-- Todo List -->
+    <div class="bg-white rounded-lg shadow-lg">
+      <div class="p-4 border-b border-gray-200">
+        <div class="flex justify-between items-center">
+          <h2 class="text-lg font-semibold text-gray-800">Danh sách công việc</h2>
+          <span id="todoCount" class="text-sm text-gray-500">0 công việc</span>
+        </div>
+      </div>
+      <div id="todoList" class="divide-y divide-gray-200">
+        <!-- <div class="todo-item p-4 hover:bg-gray-50 fade-in">
+                        <div class="flex items-center gap-3">
+                            <button
+                                class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors duration-200 bg-green-500 border-green-500 text-white"
+                                aria-label="Đánh dấu chưa hoàn thành"
+                            >
+                                ✓
+                            </button>
+                            <div class="flex-1">
+                                <p class="text-gray-800">Chơi game</p>
+                                <p class="text-xs text-gray-500 mt-1">23/07/2025</p>
+                            </div>
+
+                            <div class="flex gap-2">
+                                <button
+                                    class="p-2 text-blue-500 hover:bg-blue-100 rounded-lg transition-colors duration-200"
+                                    aria-label="Chỉnh sửa"
+                                >
+                                    ✏️
+                                </button>
+                                <button
+                                    class="p-2 text-red-500 hover:bg-red-100 rounded-lg transition-colors duration-200"
+                                    aria-label="Xóa"
+                                >
+                                    🗑️
+                                </button>
+                            </div>
+                        </div>
+                    </div> -->
+      </div>
+      <div id="emptyState" class="p-8 text-center text-gray-500 hidden">
+        <div class="text-6xl mb-4">📝</div>
+        <p class="text-lg">Chưa có công việc nào</p>
+        <p class="text-sm">Hãy thêm công việc đầu tiên của bạn!</p>
+      </div>
+    </div>
+
+    <!-- Clear Completed Button -->
+    <div class="text-center mt-6">
+      <button id="clearCompleted"
+        class="px-6 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 transition-colors duration-200 hidden">
+        🗑️ Xóa các công việc đã hoàn thành
+      </button>
+    </div>
+  </div>
+
+  <script src="./src/main.js"></script>
+</body>
+
+</html>
