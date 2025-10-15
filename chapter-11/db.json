@@ -63,6 +63,12 @@
       "password": "$2a$10$v6AjIil4KYcjEmuOhSWaV.c6m7J4zv5pt1To9FM9swYkNvpQ0hnwK",
       "username": "aa",
       "id": "1e_6LtA"
+    },
+    {
+      "email": "hihi@gmail.com",
+      "password": "$2a$10$/lPOB4mNBDYXg0VhVhgePuReUnHAS/0s1L1Fd5puUJ/tRscWrdR1G",
+      "username": "hihi",
+      "id": "ftrnLXO"
     }
   ]
 }
