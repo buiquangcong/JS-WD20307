@@ -8,6 +8,7 @@ const signinForm = document.getElementById("signinForm");
 const userInfo = document.getElementById("user-info");
 
 const idProduct = new URLSearchParams(window.location.search).get("id");
+
 if (userInfo) {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
@@ -18,21 +19,15 @@ if (userInfo) {
             <button class="btn btn-primary" onclick="logout()">Đăng xuất</button>
     `;
 }
-
 if (idProduct) {
-    axios.get(`${API}/products/${idProduct}`).then((response) => {
-        const data = response.data;
+    // lấy id từ url và call API lấy dữ liệu sản phẩm theo id
+    axios.get(`${API}/${idProduct}`).then((data) => {
+        // đổ dữ liệu vào form
         document.getElementById("name").value = data.name;
         document.getElementById("price").value = data.price;
         document.getElementById("quantity").value = data.quantity;
         document.getElementById("category").value = data.category;
         document.getElementById("image").value = data.imageUrl;
-    });
-}
-if (productAddForm) {
-    productAddForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        addProduct();
     });
 }
 if (productEditForm) {
@@ -41,7 +36,12 @@ if (productEditForm) {
         updateProduct();
     });
 }
-
+if (productAddForm) {
+    productAddForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        addProduct();
+    });
+}
 if (signupForm) {
     signupForm.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -87,21 +87,6 @@ const logout = () => {
     localStorage.removeItem("user");
     window.location.replace("./signin.html");
 };
-
-const addProduct = () => {
-    axios.post(`${API}/products/`, {
-        id: document.getElementById("id").value,
-        name: document.getElementById("name").value,
-        price: document.getElementById("price").value,
-        quantity: document.getElementById("quantity").value,
-        category: document.getElementById("category").value,
-        imageUrl: document.getElementById("image").value,
-    }).then(() => {
-        console.log("Thêm sản phẩm thành công!");
-        window.location.replace("./index.html");
-    }).catch(() => console.log("Thêm sản phẩm thất bại!"));
-}
-
 const updateProduct = () => {
     axios
         .put(`${API}/products/${idProduct}`, {
@@ -117,34 +102,55 @@ const updateProduct = () => {
         })
         .catch(() => console.log("Thất bại!"));
 };
-
+const addProduct = () => {
+    // call API thêm sản phẩm
+    axios
+        .post(`${API}/products/`, {
+            name: document.getElementById("name").value,
+            price: document.getElementById("price").value,
+            quantity: document.getElementById("quantity").value,
+            category: document.getElementById("category").value,
+            imageUrl: document.getElementById("image").value,
+        })
+        .then(() => {
+            console.log("Thêm sản phẩm thành công");
+            window.location.href = "./index.html";
+        })
+        .catch(() => console.log("Thất bại!"));
+};
 const deleteProduct = (id) => {
-    const confirm = window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này!");
+    const confirm = window.confirm("Bạn có chắc chắn muốn xóa sản phẩm này không?");
     if (!confirm) return;
-    axios.delete(`${API}/products/${id}`)
-        .then(() => console.log(" Xóa sản phẩm thành công!"))
-        .catch(() => console.log(" Xóa sản phẩm thất bại!"))
-}
+    axios
+        .delete(`${API}/products/${id}`)
+        .then(() => console.log("Xóa sản phẩm thành công"))
+        .catch(() => console.log("Thất bại!"));
+};
 const renderProduct = () => {
-    axios.get(`${API}/products`).then((reponse) => {
+    // lấy danh sách sản phẩm
+
+    axios.get(`${API}/products`).then((response) => {
         if (!productList) return;
-        productList.innerHTML = reponse.data.map(
-            (item, index) =>
-                `
-            <tr>
-                <td> ${index + 1}</td>
-                <td> <img width="50" src="${item.imageUrl}" alt="${item.name}" /></td>
-                <td> ${item.name}</td>
-                <td> ${item.price}</td>
-                <td> ${item.quantity}</td>
-                <td> ${item.category}</td>
-                <td>
+        productList.innerHTML = response.data
+            .map(
+                (item, index) => `
+                <tr>
+                    <td>${index + 1}</td>
+                    <td><img width="50" src="${item.imageUrl}" alt="${item.name}" /></td>
+                    <td>${item.name}</td>
+                    <td>${item.price}</td>
+                    <td>${item.quantity}</td>
+                    <td>${item.category}</td>
+                    <td>
                         <a href="./edit.html?id=${item.id}" class="btn btn-primary">Sửa</a>
                         <button class="btn btn-danger" onclick="deleteProduct('${item.id
-                }')">Xóa</button>
+                    }')">Xóa</button>
                     </td>
-            </tr>`
-        ).join("");
+                </tr>
+            `
+            )
+            .join("");
     });
-}
+};
 renderProduct();
+// npm i -D json-server@0.17.4 json-server-auth

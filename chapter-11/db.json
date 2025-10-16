@@ -25,12 +25,12 @@
       "imageUrl": "https://www.bing.com/th/id/OIP.a9Uoz_mcrcVW1zSEwlE48wHaHa?w=206&h=211&c=8&rs=1&qlt=90&o=6&cb=12&dpr=1.3&pid=3.1&rm=2"
     },
     {
-      "id": "3054",
       "name": "Áo dài",
       "price": "200000",
       "quantity": "25",
       "category": "Áo",
-      "imageUrl": "https://www.bing.com/th/id/OIP.9vgjIpIC0654sOT5olbH_gHaE8?w=290&h=211&c=8&rs=1&qlt=90&o=6&cb=12&dpr=1.3&pid=3.1&rm=2"
+      "imageUrl": "https://www.bing.com/th/id/OIP.9vgjIpIC0654sOT5olbH_gHaE8?w=290&h=211&c=8&rs=1&qlt=90&o=6&cb=12&dpr=1.3&pid=3.1&rm=2",
+      "id": "3054"
     }
   ],
   "users": [
@@ -69,6 +69,12 @@
       "password": "$2a$10$/lPOB4mNBDYXg0VhVhgePuReUnHAS/0s1L1Fd5puUJ/tRscWrdR1G",
       "username": "hihi",
       "id": "ftrnLXO"
+    },
+    {
+      "email": "admin1@gmail.com",
+      "password": "$2a$10$tJOdoalOu5FoPHg8n/D19Odsta0vz/r/RJ8OrsmboKvSKTxXdWLGi",
+      "username": "admin1",
+      "id": "X6Wl11D"
     }
   ]
 }
