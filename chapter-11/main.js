@@ -98,6 +98,7 @@ const addProduct = () => {
         imageUrl: document.getElementById("image").value,
     }).then(() => {
         console.log("Thêm sản phẩm thành công!");
+        alert("Thêm sản phẩm thành công!");
         window.location.replace("./index.html");
     }).catch(() => console.log("Thêm sản phẩm thất bại!"));
 }
